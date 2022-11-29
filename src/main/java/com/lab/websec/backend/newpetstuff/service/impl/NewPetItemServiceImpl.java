@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.lab.websec.backend.newpetstuff.api.dto.NewPetItems;
+import com.lab.websec.backend.newpetstuff.repository.NewPetItemsRepository;
 import com.lab.websec.backend.newpetstuff.service.PetItemsService;
-import com.lab.websec.backend.repository.NewPetItemsRepository;
 
 @Component
 public class NewPetItemServiceImpl implements PetItemsService{

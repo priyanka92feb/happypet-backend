@@ -1,4 +1,4 @@
-package com.lab.websec.backend.repository;
+package com.lab.websec.backend.newpetstuff.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
