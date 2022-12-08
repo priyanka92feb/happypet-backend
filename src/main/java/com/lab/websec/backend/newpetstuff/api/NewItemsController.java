@@ -3,11 +3,15 @@ package com.lab.websec.backend.newpetstuff.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lab.websec.backend.newpetstuff.api.dto.NewPetItems;
+import com.lab.websec.backend.newpetstuff.api.dto.NewPetItemsResponse;
 import com.lab.websec.backend.newpetstuff.service.PetItemsService;
 
 
@@ -21,9 +25,12 @@ public class NewItemsController {
 	@Autowired
 	private PetItemsService newPetItemsService;
 	
-	@GetMapping("/petItems")
-	public List<NewPetItems> findAllNewPetItems() {
-		return newPetItemsService.findAllNewPetItems();
+	@GetMapping("/newPetItems")
+	@CrossOrigin(origins = "http://localhost:9092")
+	public ResponseEntity<?> findAllNewPetItems() {
+		List<NewPetItems> allNewPetItems = newPetItemsService.findAllNewPetItems();
+		System.out.println(allNewPetItems.get(0).toString());
+		return new ResponseEntity<>(new NewPetItemsResponse(allNewPetItems), HttpStatus.OK);
 	}
 
 	/*
