@@ -1,5 +1,6 @@
 package com.lab.websec.backend.api.newpetstuff.service.impl;
 
+import java.math.BigInteger;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class NewPetItemServiceImpl implements PetItemsService{
 		for(NewPetItem newPetItem : newPetItemList) {
 			newPetItemsRepository.save(newPetItem);
 		}
-		
+	}
+	
+	public void deleteNewPetItem(String newPetItemId) {
+		newPetItemsRepository.deleteById(new BigInteger(newPetItemId));
 	}
 }

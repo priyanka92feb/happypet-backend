@@ -32,6 +32,5 @@ public class SignupRequest {
 
 	@NotBlank
 	@Size(min = 6, max = 100, message = "Please keep the password length to a minimum of 5 characters")
-	
 	private String password;
 }

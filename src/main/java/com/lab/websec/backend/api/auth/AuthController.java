@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,6 +26,7 @@ import com.lab.websec.backend.api.dto.JwtResponse;
 import com.lab.websec.backend.api.dto.LoginRequest;
 import com.lab.websec.backend.api.dto.MessageResponse;
 import com.lab.websec.backend.api.dto.SignupRequest;
+import com.lab.websec.backend.api.newpetstuff.NewItemsController;
 import com.lab.websec.backend.api.newpetstuff.repository.RoleRepository;
 import com.lab.websec.backend.api.newpetstuff.repository.UserRepository;
 import com.lab.websec.backend.model.Role;
@@ -37,6 +40,8 @@ import com.lab.websec.backend.security.services.UserDetailsImpl;
 @RequestMapping("/api/auth")
 public class AuthController {
 	
+	private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
 	@Autowired
 	AuthenticationManager authenticationManager;
 
@@ -65,7 +70,7 @@ public class AuthController {
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
-
+		logger.info("User " + userDetails.getUsername() + " logged in.");
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
@@ -117,6 +122,7 @@ public class AuthController {
 		}
 
 		user.setRoles(roles);
+		logger.info("User " + user.getUsername() + " signed up.");
 		userRepository.save(user);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

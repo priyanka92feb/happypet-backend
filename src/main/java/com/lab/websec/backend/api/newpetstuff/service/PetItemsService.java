@@ -10,4 +10,6 @@ public interface PetItemsService {
 	public List<NewPetItem> findAllNewPetItems()  throws SQLException;
 	
 	public void saveNewPetItems(List<NewPetItem> newPetItem)  throws SQLException;
+
+	public void deleteNewPetItem(String newPetItemId);
 }
