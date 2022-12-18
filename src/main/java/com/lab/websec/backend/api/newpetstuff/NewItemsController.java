@@ -47,9 +47,9 @@ public class NewItemsController {
 			logger.error("Eception in retreiving all new pet item",ex.getMessage());
 		}
 		if(allNewPetItems != null) {
-			
+			return (new NewPetItemsDto(allNewPetItems));
 		}
-		return (new NewPetItemsDto(allNewPetItems));
+		return null;
 	}
 
 	@PostMapping(value = "/newPetItem", consumes = MediaType.APPLICATION_JSON_VALUE)
