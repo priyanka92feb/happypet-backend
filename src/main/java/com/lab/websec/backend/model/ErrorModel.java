@@ -10,14 +10,14 @@ public class ErrorModel {
 
     private LocalDateTime timestamp;
 
-    private String message;
+    private String statusText;
 
     private String details;
 
-    public ErrorModel(HttpStatus httpStatus, String message, String details) {
+    public ErrorModel(HttpStatus httpStatus, String statusText, String details) {
         this.httpStatus = httpStatus;
         this.timestamp = LocalDateTime.now();
-        this.message = message;
+        this.statusText = statusText;
         this.details = details;
     }
 
@@ -37,12 +37,12 @@ public class ErrorModel {
 		this.timestamp = timestamp;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getstatusText() {
+		return statusText;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setstatusText(String statusText) {
+		this.statusText = statusText;
 	}
 
 	public String getDetails() {

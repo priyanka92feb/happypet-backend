@@ -3,6 +3,8 @@ package com.lab.websec.backend.api.exception;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +19,14 @@ import com.lab.websec.backend.model.ErrorModel;
 @RestControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
+	private static final Logger logger = LoggerFactory.getLogger(RestExceptionHandler.class);
+	
 	@Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
             ErrorModel error = new ErrorModel(HttpStatus.BAD_REQUEST
             		, ex.getBindingResult().getFieldError().getDefaultMessage()
             		, ex.getBindingResult().toString());
+            logger.info("Input Validation Error "+ex.getBindingResult().getFieldError().getDefaultMessage());
             return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
